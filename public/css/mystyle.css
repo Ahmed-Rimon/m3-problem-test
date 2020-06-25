@@ -1,17 +1,17 @@
 .edit-btn:hover {
-    background-color: #dee2e6;
+    background-color: white;
     color: #38c172;
     border: 1px solid #38c172;
 }
 
 .delete-btn:hover {
-    background-color: #dee2e6;
+    background-color: white;
     color: red;
     border: 1px solid red;
 }
 
 .view-btn:hover {
-    background-color: #dee2e6;
+    background-color: white;
     color: #3490dc;
     border: 1px solid #3490dc;
 }
