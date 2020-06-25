@@ -10,11 +10,25 @@ require('./bootstrap');
 // require('admin-lte');
 
 window.Vue = require('vue');
+import { Form, HasError, AlertError } from 'vform';
+import moment from 'moment';
+import { values } from 'lodash';
+
+
+window.form = Form;
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
 
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-
+import VueProgressBar from 'vue-progressbar'
+Vue.use(VueProgressBar, {
+    color: 'rgb(143,255,199)',
+    failedColor: 'red',
+    height: '2px'
+});
 
 let routes = [
     { path: '/dashboard', component: require('./components/dashboard.vue').default },
@@ -36,6 +50,16 @@ const router = new VueRouter({
     linkActiveClass: 'active'
 })
 
+
+// filter for design and make my work easy
+
+Vue.filter('newDate', function(dates) {
+    return moment(dates).format('MMMM Do YYYY');
+})
+
+Vue.filter('upText', function(text) {
+    return text.charAt(0).toUpperCase() + text.slice(1);
+});
 
 /**
  * The following block of code may be used to automatically register your

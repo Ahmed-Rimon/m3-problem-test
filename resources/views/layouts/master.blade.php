@@ -14,6 +14,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
  <link rel="stylesheet" href="/css/app.css">
+ <link rel="stylesheet" href="/css/mystyle.css">
 </head>
 <body class="hold-transition sidebar-mini" >
 <div class="wrapper" id="app">
@@ -103,7 +104,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
               <li class="nav-item">
                 <router-link to="/users" class="nav-link">
                   <i class="fas fa-users nav-icon"></i>
-                  <p>Users</p>
+                  <p>Buyers</p>
                 </router-link>
               </li>
               <li class="nav-item">
@@ -171,6 +172,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
       <div class="container-fluid">
 
         <router-view></router-view>
+        <vue-progress-bar></vue-progress-bar>
 
       </div><!-- /.container-fluid -->
     </div>
