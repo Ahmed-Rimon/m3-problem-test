@@ -4,10 +4,38 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('bootstrap');
-require('admin-lte');
+
+
+require('./bootstrap');
+// require('admin-lte');
 
 window.Vue = require('vue');
+
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+
+
+let routes = [
+    { path: '/dashboard', component: require('./components/dashboard.vue').default },
+    { path: '/profile', component: require('./components/profile.vue').default },
+    { path: '/users', component: require('./components/users.vue').default },
+    { path: '/sellers', component: require('./components/Sellers.vue').default },
+    { path: '/products', component: require('./components/products.vue').default },
+    { path: '/history', component: require('./components/history.vue').default }
+
+
+
+
+]
+
+
+const router = new VueRouter({
+    mode: 'history',
+    routes,
+    linkActiveClass: 'active'
+})
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,4 +58,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router
 });
