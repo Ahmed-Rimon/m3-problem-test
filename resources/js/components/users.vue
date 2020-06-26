@@ -116,15 +116,7 @@
       <has-error :form="form" field="password"></has-error>
     </div>
 
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <span class="input-group-text">Upload</span>
-  </div>
-  <div class="custom-file">
-    <input type="file" class="custom-file-input" id="inputGroupFile01">
-    <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
-  </div>
-</div>
+
 
 
       </div>
@@ -174,8 +166,8 @@ methods: {
 
 
         swal.fire(
-                  'Deleted!',
-                  'Your file has been deleted.',
+                  'Updated!',
+                  'User has been Updated.',
                   'success'
                 )
                 this.$Progress.finish();
@@ -185,6 +177,10 @@ methods: {
         })
         .catch(()=>{
         this.$Progress.fail();
+        toast.fire({
+          icon: 'error',
+          title: 'There is something wrong'
+        })
 
         });
     },

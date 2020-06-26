@@ -29,6 +29,13 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.org"
+        }
+    },
     "extra": {
         "laravel": {
             "dont-discover": []

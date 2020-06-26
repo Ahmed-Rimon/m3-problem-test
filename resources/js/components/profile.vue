@@ -76,45 +76,48 @@
                       <div class="form-group row">
                         <label for="inputName" class="col-sm-2 col-form-label">Name</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputName" placeholder="Name">
+                          <input type="text" v-model="form.name" class="form-control" id="inputName" placeholder="Name">
                         </div>
                       </div>
                       <div class="form-group row">
                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                         <div class="col-sm-10">
-                          <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                          <input type="email" v-model="form.email"  class="form-control" id="inputEmail" placeholder="Email">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputName2" class="col-sm-2 col-form-label">Name</label>
+                        <label for="inputName2" class="col-sm-2 col-form-label">Type</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputName2" placeholder="Name">
+                          <input type="text" v-model="form.type" class="form-control" id="inputName2" placeholder="Name">
                         </div>
                       </div>
                       <div class="form-group row">
-                        <label for="inputExperience" class="col-sm-2 col-form-label">Experience</label>
+                        <label for="inputExperience" class="col-sm-2 col-form-label">Bio</label>
                         <div class="col-sm-10">
-                          <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                          <textarea class="form-control" v-model="form.bio" id="inputExperience" placeholder="Experience"></textarea>
                         </div>
                       </div>
-                      <div class="form-group row">
-                        <label for="inputSkills" class="col-sm-2 col-form-label">Skills</label>
+
+                         <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Password</label>
                         <div class="col-sm-10">
-                          <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                          <input type="text" v-model="form.password" class="form-control" id="inputPassword" placeholder="Password">
                         </div>
                       </div>
+
+
+
+                    <div class="form-group">
+                        <label for="photo" class="col-sm-2 control-label">Profile Photos</label>
+                        <div class="col-sm-12">
+                          <input type="file"  @change="updateImage" class="form-input" id="photo" name="photo">
+                        </div>
+                      </div>
+
+
                       <div class="form-group row">
                         <div class="offset-sm-2 col-sm-10">
-                          <div class="checkbox">
-                            <label>
-                              <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group row">
-                        <div class="offset-sm-2 col-sm-10">
-                          <button type="submit" class="btn btn-danger">Submit</button>
+                          <button @click.prevent="updateInfo" type="submit" class="btn btn-success edit-btn">Update</button>
                         </div>
                       </div>
                     </form>
@@ -132,8 +135,60 @@
 
 <script>
     export default {
+      data(){
+
+           return{
+
+               form:new form({
+                   id:'',
+                   name: '',
+                   email: '',
+                   password: '',
+                   type: '',
+                   bio: '',
+                    photo: ''
+               })
+           }
+        },
+        methods:{
+            updateInfo(){
+                this.form.put('api/profile/')
+                .then(()=>{
+
+                })
+                .catch(()=>{
+
+                })
+
+            },
+            updateImage(e){
+                let file = e.target.files[0];
+        // console.log(file);
+      let reader = new FileReader();
+    //   reader.onloadend = function(){
+    //     //   console.log('RESULT', reader.result)
+    //   }
+    //   reader.readAsDataURL(file);
+      if (file["size"] < 2111775) {
+        reader.onloadend = file => {
+          // console.log("RESULT", reader.result);
+          this.form.photo = reader.result;
+        };
+
+        reader.readAsDataURL(file);
+      } else {
+        swal.fire("Oops...", "File size is more then 2 MB", "error");
+      }
+
+            }
+        },
         mounted() {
             console.log('Component mounted.')
+        },
+        created() {
+            // axios.get("api/profile").then(( {data} ) => (this.form.fill(data)));
+            axios.get("api/profile").then(({ data }) => this.form.fill(data));
+
         }
     }
 </script>
